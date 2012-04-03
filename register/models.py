@@ -1,0 +1,51 @@
+from django.db import models
+
+# Create your models here.
+class Event(models.Model):
+	name = models.CharField(max_length=200)
+	date_created = models.DateTimeField('date created')
+	date_held = models.DateTimeField('date held')
+	location = models.CharField(max_length=200)
+	POC_name = models.CharField(max_length=100)
+	POC_email= models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.name
+
+class Activity(models.Model):
+	event = models.ForeignKey(Event)
+	name = models.CharField(max_length=100)
+	description = models.CharField(max_length=512)
+
+	def __unicode__(self):
+		return self.name
+	
+class School(models.Model):
+	event = models.ForeignKey(Event)	
+	school_name = models.CharField('School Name',max_length=200)
+	video_contest_p = models.BooleanField("Video Contest Participant")
+
+	def __unicode__(self):
+		return self.school_name	
+
+class Chaperone(models.Model):
+	group = models.ForeignKey(School)
+	event = models.ForeignKey(Event)
+	chaperone_name = models.CharField(max_length=200)
+#	last_name = models.CharField(max_length=100)
+	email_address = models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.chaperone_name
+
+class Student(models.Model):
+	group = models.ForeignKey(School)
+	event = models.ForeignKey(Event)
+	student_name = models.CharField(max_length=200)
+#	last_name = models.CharField(max_length=100)
+	grade = models.IntegerField()
+	activity1 = models.ForeignKey(Activity, related_name='+')
+	activity2 = models.ForeignKey(Activity, related_name='+')
+
+	def __unicode__(self):
+		return self.student_name

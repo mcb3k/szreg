@@ -1,0 +1,34 @@
+from register.models import Event, Activity, School, Chaperone, Student
+from django.contrib import admin
+
+#lets hook in the activities with the events
+class ActivityInline(admin.StackedInline):
+	model = Activity
+	extra = 2
+
+class EventAdmin(admin.ModelAdmin):
+	fieldsets = [ 
+			(None,			 	 {'fields': ['name','location','POC']}),
+			('Date Information', {'fields': ['date_created', 'date_held']}),
+	]
+	inlines = [ActivityInline]
+	list_display = ('name', 'date_held', 'location')
+
+class ChaperoneInline(admin.TabularInline):
+	model = Chaperone
+	extra = 2
+
+class StudentInline(admin.TabularInline):
+	model = Student
+	extra = 2
+
+class SchoolAdmin(admin.ModelAdmin):
+	fieldsets = [
+			(None,				{'fields': ['school_name', 'video_contest_p','event']}),
+	]
+	inlines = [ChaperoneInline, StudentInline,]
+#	inlines = [ChaperoneInline]
+#	list_display = ('school_name')
+
+admin.site.register(Event, EventAdmin)
+admin.site.register(School, SchoolAdmin)

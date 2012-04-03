@@ -1,0 +1,28 @@
+body {
+	color:black;
+	background-color:#D3D3D3;
+}
+
+div.header {
+	color:gray;
+	background-color:black;
+	font-family:serif;
+	font-size:32pt;
+	width:1024px;
+	margin-bottom:0px;
+	border: thin black solid;
+	padding:10px;
+}
+
+div.content{
+	
+	color:black;
+	background-color:#F5DEB3;
+	font-family:sans-serif;
+	width:1024px;
+	border: thin black solid;
+	padding:10px;
+}
+h1.title{
+	margin:0px;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+<title>Register for {{Event.name}}</title>
+<style type="text/css">
+body {
+	color:black;
+	background-color:#D3D3D3;
+}
+
+div.header {
+	color:gray;
+	background-color:black;
+	font-family:serif;
+	font-size:32pt;
+	width:1024px;
+	margin-bottom:0px;
+	border: thin black solid;
+	padding:10px;
+}
+
+div.content{
+	
+	color:black;
+	background-color:#F3E5AB;
+	font-family:sans-serif;
+	width:1024px;
+	border: thin black solid;
+	padding:10px;
+}
+h1.title{
+	margin:0px;
+}
+h2.section-heading{
+	margin-bottom:5px;
+	border-bottom: thin black solid;
+	border-left:thin black solid;
+	width:80%;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1 class="title">SIGMA ZETA</h1>
+</div>
+<div class="content">
+<h1>{{ Event.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="/register/{{ Event.id }}/register/" method="post">
+	<h2 class="section-heading">School Information:</h2>
+{% csrf_token %}
+	<label for="schoolName">School Name:</label>
+	<input type="text" name="schoolName"/>
+	<br/>
+	<label for="videoContest">Participating in the video contest?</label>
+	<input type="checkbox" name="videoContest"/>
+	<br/>
+
+	<h2 class="section-heading">Chaperone Information:</h2>
+	<label for="chaperoneName1">Chaperone Name:</label>	
+	<input type="text" name="chaperoneName1"/>
+	<label for="chaperoneEmail1">Chaperone Email:</label>	
+	<input type="email" name="chaperoneEmail1"/>
+	<br/>
+
+	<label for="chaperoneName2">Chaperone Name:</label>
+	<input type="text" name="chaperoneName2"/>
+	<label for="chaperoneEmail2">Chaperone Email:</label>
+	<input type="email" name="chaperoneEmail2"/>
+	<br/>
+
+	<h2 class="section-heading">Student Information:</h2>
+	{% for student in number_of_students %}
+		<label for="studentName{{forloop.counter}}">Student Name</label>
+		<input type="text" name="studentName{{forloop.counter}}"/>
+		<br/>
+		<label for="studentActivity1_{{forloop.counter}}">Activity: </label>
+		<select name ="studentActivity1_{{forloop.counter}}">
+		{% if activity_list %}
+			{% for activity in activity_list %}
+			<option>{{activity.name}}</option>
+			{%endfor%}
+		{%endif%}
+		</select>	
+		<label for="studentActivity2_{{forloop.counter}}">Activity: </label>
+		<select name="studentActivity2_{{forloop.counter}}">
+		{% if activity_list %}
+			{% for activity in activity_list %}
+			<option>{{activity.name}}</option>
+			{%endfor%}
+		{%endif%}
+		</select>
+		<select name="studentGrade{{forloop.counter}}">
+		{% for grade in grades_list %}
+			<option>{{grade}}</option>
+		{% endfor %}
+		</select>
+		<br/>
+		<br/>
+	{% endfor %}
+	<input type="submit" name="registration"/>
+</form>
+</div>
+</body>

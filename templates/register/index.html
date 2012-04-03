@@ -1,0 +1,10 @@
+{% if current_events_list %}
+	<ul>
+	{% for event in current_events_list %}
+		<li><a href="/register/{{event.id}}/">{{event.name}}</a></li>
+	{% endfor %}
+	</ul>
+
+	{% else %}
+		<p>No Events are upcoming. Check back later!</p>
+	{% endif %}

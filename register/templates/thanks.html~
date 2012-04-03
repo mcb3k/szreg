@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Thanks for registering for {{Event.name}}!</title>
+<style type="text/css">
+body {
+	color:black;
+	background-color:#D3D3D3;
+}
+
+div.header {
+	color:gray;
+	background-color:black;
+	font-family:serif;
+	font-size:32pt;
+	width:1024px;
+	margin-bottom:0px;
+	border: thin black solid;
+	padding:10px;
+}
+
+div.content{
+	
+	color:black;
+	background-color:#F3E5AB;
+	font-family:sans-serif;
+	width:1024px;
+	border: thin black solid;
+	padding:10px;
+}
+h1.title{
+	margin:0px;
+}
+h2.section-heading{
+	margin-bottom:5px;
+	border-bottom: thin black solid;
+	border-left:thin black solid;
+	width:80%;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1 class="title">SIGMA ZETA</h1>
+</div>
+<div class="content">
+<h1>{{ Event.name }}</h1>
+<p>Thank you for registering!  For any help, please contact {{Event.POC_name}} at {{Event.POC_email}} </p>
+<p>The event will be held on {{ Event.date_held }}</p>
+<p>The event is located at {{ Event.location }}.</p>
+</div>
+</body>
+</html>
